@@ -70,7 +70,3 @@ class SudokuTest(unittest.TestCase):
         inputBoard = copy.deepcopy(self.outputBoard)
         inputBoard[8][8] = 0
         self.assertEqual(SudokuSolver.SudokuBoard(inputBoard).returnBoard(), inputBoard)
-
-
-if __name__ == '__main__':
-    unittest.main()

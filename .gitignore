@@ -1,4 +1,5 @@
-/__pycache__
+sudoku-solver/__pycache__
+sudoku-solver/test/__pycache__
 a.out
 *.txt
 *.cpp
