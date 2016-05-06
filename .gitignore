@@ -1,5 +1,6 @@
-__pycache__
+/__pycache__
 a.out
-.txt
-.cpp
-.sublime-project
+*.txt
+*.cpp
+*.sublime-project
+*.sublime-workspace
