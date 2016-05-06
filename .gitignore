@@ -4,3 +4,5 @@ a.out
 *.cpp
 *.sublime-project
 *.sublime-workspace
+.*
+!.gitignore
