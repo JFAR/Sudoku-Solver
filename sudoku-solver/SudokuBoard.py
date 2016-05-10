@@ -12,12 +12,34 @@ class SudokuBoard:
                     self.cells.append(Cell(rowId, columnId))
 
     def applyRowRuleForId(self, rowId):
-        rowOfInterest = [cell for cell in self.cells if cell.getRowId() == rowId]
-        setEntries = [cell.getOptions()[0] for cell in rowOfInterest if cell.isSet()]
+        setEntries = self.returnRowById(rowId)
 
-        for cell in rowOfInterest:
+        for cell in self.getRowById(rowId):
             if cell.isSet() is False:
-                cell.removeOptions(setEntries)
+                cell.removeOptions(self.returnRowById(rowId))
+
+                if cell.isSet():
+                    self.applyRowRuleForId(rowId)
+                    break
+
+    def applyRowRule(self):
+        for i in range(9):
+            self.applyRowRuleForId(i)
+
+    def applyColumnRuleForId(self, columnId):
+        setEntries = self.returnColumnById(columnId)
+
+        for cell in self.getColumnById(columnId):
+            if cell.isSet() is False:
+                cell.removeOptions(self.returnColumnById(columnId))
+
+                if cell.isSet():
+                    self.applyColumnRuleForId(columnId)
+                    break
+
+    def applyColumnRule(self):
+        for i in range(9):
+            self.applyColumnRuleForId(i)
 
     def getCell(self, rowId, columnId):
         return [cell for cell in self.cells if cell.getRowId() == rowId and cell.getColumnId() == columnId][0]

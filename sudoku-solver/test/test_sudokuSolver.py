@@ -20,37 +20,35 @@ class SudokuTest(unittest.TestCase):
         inputBoard = self.outputBoard
         self.assertEqual(SudokuSolver.solver(inputBoard), self.outputBoard)
 
-    def test_reduceOptionsReducesOptions(self):
-        inputBoard = copy.deepcopy(self.outputBoard)
-        inputBoard[8][8] = 0
-        sudokuBoard = SudokuSolver.SudokuBoard(inputBoard)
-        completeSudokuBoard = SudokuSolver.SudokuBoard(self.outputBoard)
-        sudokuBoard.applyRowRuleForId(8)
-        self.assertEqual([cell.getOptions()[0] for cell in sudokuBoard.getRowById(8) if cell.isSet()], [cell.getOptions()[0] for cell in completeSudokuBoard.getRowById(8)])
-
-    def test_removeOptions(self):
-        cell = SudokuSolver.Cell(0, 0)
-        cell.removeOptions([1, 2, 3])
-        self.assertListEqual(cell.getOptions(), [4, 5, 6, 7, 8, 9])
-
-    def test_returnSetCellsInRowAsNumbers(self):
-        sudokuBoard = SudokuSolver.SudokuBoard(self.outputBoard)
-        self.assertListEqual(sudokuBoard.returnRowById(8), [4, 3, 7, 5, 2, 9, 8, 1, 6])
-
-    def test_returnSetCellsInColumnAsNumbers(self):
-        sudokuBoard = SudokuSolver.SudokuBoard(self.outputBoard)
-        self.assertListEqual(sudokuBoard.returnColumnById(8), [8, 1, 5, 7, 2, 4, 3, 9, 6])
-
-    def test_returnCellBlockIds(self):
-        cell = SudokuSolver.Cell(8, 5)
-        self.assertListEqual(cell.getBlockIds(), [2, 1])
-
-    def test_returnSetCellsInBlockAsNumbers(self):
-        sudokuBoard = SudokuSolver.SudokuBoard(self.outputBoard)
-        self.assertListEqual(sudokuBoard.returnBlockByIds(2, 2), [7, 2, 3, 4, 5, 9, 8, 1, 6])
-
-    @unittest.skip("skip")
+    @unittest.skip("Cannot pass this test yet... solver not smart enough!")
     def test_solvesSimpleSudoku(self):
+        easySudoku = [[7, 5, 0,  0, 4, 2,  0, 6, 9],
+                      [2, 4, 3,  0, 9, 0,  0, 0, 8],
+                      [0, 0, 0,  1, 0, 7,  0, 4, 0],
+
+                      [0, 1, 0,  6, 5, 0,  8, 9, 7],
+                      [0, 0, 8,  0, 0, 0,  4, 0, 0],
+                      [6, 7, 9,  0, 8, 4,  0, 3, 0],
+
+                      [0, 6, 0,  4, 0, 5,  0, 0, 0],
+                      [8, 0, 0,  0, 6, 0,  2, 7, 4],
+                      [1, 2, 0,  9, 7, 0,  0, 5, 3]]
+
+        solvedSudoku = [[7, 5, 1,  8, 4, 2,  3, 6, 9],
+                        [2, 4, 3,  5, 9, 6,  7, 1, 8],
+                        [9, 8, 6,  1, 3, 7,  5, 4, 2],
+
+                        [4, 1, 2,  6, 5, 3,  8, 9, 7],
+                        [5, 3, 8,  7, 1, 9,  4, 2, 6],
+                        [6, 7, 9,  2, 8, 4,  1, 3, 5],
+
+                        [3, 6, 7,  4, 2, 5,  9, 8, 1],
+                        [8, 9, 5,  3, 6, 1,  2, 7, 4],
+                        [1, 2, 4,  9, 7, 8,  6, 5, 3]]
+
+        self.assertEqual(SudokuSolver.solver(easySudoku), solvedSudoku)
+
+    def test_solvesEasySudoku(self):
         inputBoard = copy.deepcopy(self.outputBoard)
         inputBoard[8][8] = 0
         self.assertEqual(SudokuSolver.solver(inputBoard), self.outputBoard)
@@ -62,11 +60,3 @@ class SudokuTest(unittest.TestCase):
         inputBoard = copy.deepcopy(self.outputBoard)
         inputBoard[8][8] = 0
         self.assertFalse(SudokuSolver.checkBoard(inputBoard))
-
-    def test_returnBoardReturnsSameCompleteBoard(self):
-        self.assertEqual(SudokuSolver.SudokuBoard(self.outputBoard).returnBoard(), self.outputBoard)
-
-    def test_returnBoardReturnsSameCompleteBoard(self):
-        inputBoard = copy.deepcopy(self.outputBoard)
-        inputBoard[8][8] = 0
-        self.assertEqual(SudokuSolver.SudokuBoard(inputBoard).returnBoard(), inputBoard)

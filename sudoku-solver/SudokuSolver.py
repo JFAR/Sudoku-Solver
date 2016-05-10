@@ -1,4 +1,3 @@
-from SudokuCell import Cell
 from SudokuBoard import SudokuBoard
 
 
@@ -30,12 +29,12 @@ def checkBoard(board):
 
 def solver(inputBoard):
     oldBoard = []
-    while checkBoard(inputBoard) is False and oldBoard != inputBoard:
-        oldBoard = inputBoard
-        sudokuBoard = SudokuBoard(inputBoard)
-        for cellWithOptions in sudokuBoard.findCellsWithOptions():
-            sudokuBoard.reduceCellOptions(cellWithOptions.getRowId(), cellWithOptions.getColumnId())
+    newBoard = inputBoard
+    sudokuBoard = SudokuBoard(inputBoard)
+    while (checkBoard(newBoard) is False) and (newBoard != oldBoard):
+        oldBoard = newBoard
+        sudokuBoard.applyRowRule()
+        sudokuBoard.applyColumnRule()
+        newBoard = sudokuBoard.returnBoard()
 
-        inputBoard = sudokuBoard.returnBoard()
-
-    return inputBoard
+    return newBoard
