@@ -6,6 +6,7 @@ class SudokuBoard:
     def __init__(self, board):
         self.cells = []
         self.rows = []
+        self.columns = []
         for rowId in range(9):
             for columnId in range(9):
                 if board[rowId][columnId] != 0:
