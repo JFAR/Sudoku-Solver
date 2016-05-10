@@ -1,9 +1,11 @@
 from SudokuCell import Cell
+from SetOfCells import SetOfCells
 
 
 class SudokuBoard:
     def __init__(self, board):
         self.cells = []
+        self.rows = []
         for rowId in range(9):
             for columnId in range(9):
                 if board[rowId][columnId] != 0:
@@ -11,16 +13,14 @@ class SudokuBoard:
                 else:
                     self.cells.append(Cell(rowId, columnId))
 
+        for rowId in range(9):
+            self.rows.append(SetOfCells([cell for cell in self.cells if cell.getRowId() == rowId]))
+
+        for columnId in range(9):
+            self.columns.append(SetOfCells([cell for cell in self.cells if cell.getColumnId() == columnId]))
+
     def applyRowRuleForId(self, rowId):
-        setEntries = self.returnRowById(rowId)
-
-        for cell in self.getRowById(rowId):
-            if cell.isSet() is False:
-                cell.removeOptions(self.returnRowById(rowId))
-
-                if cell.isSet():
-                    self.applyRowRuleForId(rowId)
-                    break
+        self.rows[rowId].reduceCells()
 
     def applyRowRule(self):
         for i in range(9):
