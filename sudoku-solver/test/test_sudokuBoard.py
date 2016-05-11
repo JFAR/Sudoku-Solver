@@ -50,7 +50,7 @@ class SudokuBoardTest(unittest.TestCase):
 
     def test_returnSetCellsInBlockAsNumbers(self):
         sudokuBoard = SudokuBoard.SudokuBoard(self.outputBoard)
-        self.assertListEqual(sudokuBoard.returnBlockByIds(2, 2), [7, 2, 3, 4, 5, 9, 8, 1, 6])
+        self.assertListEqual(sudokuBoard.returnBlockById(8), [7, 2, 3, 4, 5, 9, 8, 1, 6])
 
     def test_applyRowRuleSolvesSimpleSudoku(self):
         inputBoard = copy.deepcopy(self.outputBoard)

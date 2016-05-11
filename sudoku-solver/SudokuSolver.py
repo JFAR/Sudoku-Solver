@@ -18,10 +18,7 @@ def checkBoard(board):
         if checkContainsNumbers(sudokuBoard.returnColumnById(i)) is False:
             return False
 
-        rowId = i % 3
-        columnId = int((i - rowId) / 3)
-
-        if checkContainsNumbers(sudokuBoard.returnBlockByIds(rowId, columnId)) is False:
+        if checkContainsNumbers(sudokuBoard.returnBlockById(i)) is False:
             return False
 
     return True

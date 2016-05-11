@@ -7,6 +7,7 @@ class SudokuBoard:
         self.cells = []
         self.rows = []
         self.columns = []
+        self.blocks = []
         for rowId in range(9):
             for columnId in range(9):
                 if board[rowId][columnId] != 0:
@@ -19,6 +20,11 @@ class SudokuBoard:
 
         for columnId in range(9):
             self.columns.append(SetOfCells([cell for cell in self.cells if cell.getColumnId() == columnId]))
+
+        for blockId in range(9):
+            x = blockId % 3
+            y = int((blockId - x) / 3)
+            self.blocks.append(SetOfCells([cell for cell in self.cells if cell.getBlockRowId() == x and cell.getBlockColumnId() == y]))
 
     def applyRowRuleForId(self, rowId):
         self.rows[rowId].reduceCells()
@@ -78,8 +84,10 @@ class SudokuBoard:
     def returnColumnById(self, columnId):
         return [cell.getOptions()[0] for cell in self.cells if cell.getColumnId() == columnId and cell.isSet()]
 
-    def returnBlockByIds(self, blockRowId, blockColumnId):
-        return [cell.getOptions()[0] for cell in self.cells if cell.getBlockIds() == [blockRowId, blockColumnId] and cell.isSet()]
+    def returnBlockById(self, blockId):
+        x = blockId % 3
+        y = int((blockId - x) / 3)
+        return [cell.getOptions()[0] for cell in self.cells if cell.getBlockIds() == [x, y] and cell.isSet()]
 
     def returnBoard(self):
         output = []
