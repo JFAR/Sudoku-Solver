@@ -28,15 +28,7 @@ class SudokuBoard:
             self.applyRowRuleForId(i)
 
     def applyColumnRuleForId(self, columnId):
-        setEntries = self.returnColumnById(columnId)
-
-        for cell in self.getColumnById(columnId):
-            if cell.isSet() is False:
-                cell.removeOptions(self.returnColumnById(columnId))
-
-                if cell.isSet():
-                    self.applyColumnRuleForId(columnId)
-                    break
+        self.columns[columnId].reduceCells()
 
     def applyColumnRule(self):
         for i in range(9):
