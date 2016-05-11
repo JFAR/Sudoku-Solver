@@ -32,6 +32,7 @@ def solver(inputBoard):
         oldBoard = newBoard
         sudokuBoard.applyRowRule()
         sudokuBoard.applyColumnRule()
+        sudokuBoard.applyBlockRule()
         newBoard = sudokuBoard.returnBoard()
 
     return newBoard
