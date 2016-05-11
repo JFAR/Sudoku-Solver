@@ -77,3 +77,10 @@ class SudokuBoardTest(unittest.TestCase):
         sudokuBoard = SudokuBoard.SudokuBoard(inputBoard)
         sudokuBoard.applyColumnRule()
         self.assertListEqual(sudokuBoard.returnBoard(), self.outputBoard)
+
+    def test_applyBlockRuleSolvesSimpleSudoku(self):
+        inputBoard = copy.deepcopy(self.outputBoard)
+        inputBoard[8][8] = 0
+        sudokuBoard = SudokuBoard.SudokuBoard(inputBoard)
+        sudokuBoard.applyBlockRule()
+        self.assertListEqual(sudokuBoard.returnBoard(), self.outputBoard)
