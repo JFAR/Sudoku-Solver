@@ -40,6 +40,18 @@ class SudokuBoardTest(unittest.TestCase):
         sudokuBoard.applyColumnRuleForId(8)
         self.assertEqual([cell.getOptions()[0] for cell in sudokuBoard.getRowById(8) if cell.isSet()], [cell.getOptions()[0] for cell in completeSudokuBoard.getRowById(8)])
 
+    def test_reduceOptionsReducesOptionsWithBlockRule(self):
+        inputBoard = copy.deepcopy(self.outputBoard)
+        inputBoard[8][8] = 0
+        sudokuBoard = SudokuBoard.SudokuBoard(inputBoard)
+        completeSudokuBoard = SudokuBoard.SudokuBoard(self.outputBoard)
+        sudokuBoard.applyBlockRuleForId(8)
+        self.assertEqual([cell.getOptions()[0] for cell in sudokuBoard.getBlockById(8) if cell.isSet()], [cell.getOptions()[0] for cell in completeSudokuBoard.getBlockById(8)])
+
+    def test_getBlockById(self):
+        sudokuBoard = SudokuBoard.SudokuBoard(self.outputBoard)
+        self.assertEqual(sudokuBoard.getBlockById(8), sudokuBoard.getBlockByIds(2, 2))
+
     def test_returnSetCellsInRowAsNumbers(self):
         sudokuBoard = SudokuBoard.SudokuBoard(self.outputBoard)
         self.assertListEqual(sudokuBoard.returnRowById(8), [4, 3, 7, 5, 2, 9, 8, 1, 6])

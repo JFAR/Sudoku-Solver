@@ -36,6 +36,9 @@ class SudokuBoard:
     def applyColumnRuleForId(self, columnId):
         self.columns[columnId].reduceCells()
 
+    def applyBlockRuleForId(self, blockId):
+        self.blocks[blockId].reduceCells()
+
     def applyColumnRule(self):
         for i in range(9):
             self.applyColumnRuleForId(i)
@@ -51,6 +54,11 @@ class SudokuBoard:
 
     def getBlockByIds(self, blockRowId, blockColumnId):
         return [cell for cell in self.cells if cell.getBlockRowId() == blockRowId and cell.getBlockColumnId() == blockColumnId]
+
+    def getBlockById(self, blockId):
+        x = blockId % 3
+        y = int((blockId - x) / 3)
+        return self.getBlockByIds(x, y)
 
     def reduceCellOptions(self, rowId, columnId):
         cellOfInterest = self.getCell(rowId, columnId)
