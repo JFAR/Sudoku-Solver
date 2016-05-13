@@ -90,3 +90,13 @@ class SudokuBoardTest(unittest.TestCase):
         inputBoard[8][8] = 0
         sudokuBoard = SudokuBoard.SudokuBoard(inputBoard)
         self.assertEqual(sudokuBoard.findFirstUnSetCell(), sudokuBoard.getCell(8, 8))
+
+    def test_isSolvedForIncompleteBoard(self):
+        inputBoard = copy.deepcopy(self.outputBoard)
+        inputBoard[8][8] = 0
+        sudokuBoard = SudokuBoard.SudokuBoard(inputBoard)
+        self.assertFalse(sudokuBoard.isSolved())
+
+    def test_isSolvedForCompleteBoard(self):
+        sudokuBoard = SudokuBoard.SudokuBoard(self.outputBoard)
+        self.assertTrue(sudokuBoard.isSolved())

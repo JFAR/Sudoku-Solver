@@ -115,3 +115,9 @@ class SudokuBoard:
                     output[i].append(0)
 
         return output
+
+    def isSolved(self):
+        if self.findCellsWithOptions() == []:
+            return True
+        else:
+            return False
