@@ -50,59 +50,11 @@ class SudokuBoard:
     def getCell(self, rowId, columnId):
         return [cell for cell in self.cells if cell.getRowId() == rowId and cell.getColumnId() == columnId][0]
 
-    def getRowById(self, rowId):
-        return [cell for cell in self.cells if cell.getRowId() == rowId]
-
-    def getColumnById(self, columnId):
-        return [cell for cell in self.cells if cell.getColumnId() == columnId]
-
-    def getBlockByIds(self, blockRowId, blockColumnId):
-        return [cell for cell in self.cells if cell.getBlockRowId() == blockRowId and cell.getBlockColumnId() == blockColumnId]
-
-    def getBlockById(self, blockId):
-        x = blockId % 3
-        y = int((blockId - x) / 3)
-        return self.getBlockByIds(x, y)
-
-    def reduceCellOptions(self, rowId, columnId):
-        cellOfInterest = self.getCell(rowId, columnId)
-        if cellOfInterest.isSet() is False:
-            print(str(cellOfInterest.getRowId()) + " " + str(cellOfInterest.getColumnId()))
-            print(cellOfInterest.getOptions())
-            rowOfCellNumbers = [cell.getOptions()[0] for cell in self.getRowById(rowId) if cell.isSet()]
-            for x in rowOfCellNumbers:
-                cellOfInterest.removeOption(x)
-
-            print(cellOfInterest.getOptions())
-
-            columnOfCellNumbers = [cell.getOptions()[0] for cell in self.getColumnById(columnId) if cell.isSet()]
-            for x in columnOfCellNumbers:
-                cellOfInterest.removeOption(x)
-
-            print(cellOfInterest.getOptions())
-
-            blockOfCellNumbers = [cell.getOptions()[0] for cell in self.getBlockByIds(cellOfInterest.getBlockRowId(), cellOfInterest.getBlockColumnId()) if cell.isSet()]
-            for x in blockOfCellNumbers:
-                cellOfInterest.removeOption(x)
-
-            print(cellOfInterest.getOptions())
-
     def findCellsWithOptions(self):
         return [cell for cell in self.cells if cell.isSet() is False]
 
     def findFirstUnSetCell(self):
         return self.findCellsWithOptions()[0]
-
-    def returnRowById(self, rowId):
-        return [cell.getOptions()[0] for cell in self.cells if cell.getRowId() == rowId and cell.isSet()]
-
-    def returnColumnById(self, columnId):
-        return [cell.getOptions()[0] for cell in self.cells if cell.getColumnId() == columnId and cell.isSet()]
-
-    def returnBlockById(self, blockId):
-        x = blockId % 3
-        y = int((blockId - x) / 3)
-        return [cell.getOptions()[0] for cell in self.cells if cell.getBlockIds() == [x, y] and cell.isSet()]
 
     def returnBoard(self):
         output = []

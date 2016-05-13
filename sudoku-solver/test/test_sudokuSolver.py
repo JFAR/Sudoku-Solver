@@ -79,11 +79,3 @@ class SudokuTest(unittest.TestCase):
         inputBoard = copy.deepcopy(self.outputBoard)
         inputBoard[8][8] = 0
         self.assertEqual(SudokuSolver.solver(inputBoard), self.outputBoard)
-
-    def test_checkBoardCorrect(self):
-        self.assertTrue(SudokuSolver.checkBoard(self.outputBoard))
-
-    def test_checkBoardIncorrect(self):
-        inputBoard = copy.deepcopy(self.outputBoard)
-        inputBoard[8][8] = 0
-        self.assertFalse(SudokuSolver.checkBoard(inputBoard))
