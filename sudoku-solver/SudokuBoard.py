@@ -90,6 +90,9 @@ class SudokuBoard:
     def findCellsWithOptions(self):
         return [cell for cell in self.cells if cell.isSet() is False]
 
+    def findFirstUnSetCell(self):
+        return self.findCellsWithOptions()[0]
+
     def returnRowById(self, rowId):
         return [cell.getOptions()[0] for cell in self.cells if cell.getRowId() == rowId and cell.isSet()]
 

@@ -84,3 +84,9 @@ class SudokuBoardTest(unittest.TestCase):
         sudokuBoard = SudokuBoard.SudokuBoard(inputBoard)
         sudokuBoard.applyBlockRule()
         self.assertListEqual(sudokuBoard.returnBoard(), self.outputBoard)
+
+    def test_findFirstUnSetCell(self):
+        inputBoard = copy.deepcopy(self.outputBoard)
+        inputBoard[8][8] = 0
+        sudokuBoard = SudokuBoard.SudokuBoard(inputBoard)
+        self.assertEqual(sudokuBoard.findFirstUnSetCell(), sudokuBoard.getCell(8, 8))
