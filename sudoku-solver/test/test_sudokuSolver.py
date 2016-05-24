@@ -47,7 +47,6 @@ class SudokuTest(unittest.TestCase):
 
         self.assertEqual(SudokuSolver.solver(easySudoku), solvedSudoku)
 
-    @unittest.skip("Can't solve this one yet!")
     def test_solvesMediumSudoku(self):
         mediumSudoku = [[1, 3, 0,  8, 0, 0,  6, 5, 2],
                         [0, 0, 2,  0, 0, 7,  0, 0, 0],

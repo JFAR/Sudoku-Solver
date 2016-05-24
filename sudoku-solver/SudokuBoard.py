@@ -73,3 +73,21 @@ class SudokuBoard:
             return True
         else:
             return False
+
+    def checkSetsAreValid(self, sets):
+        for setOfCells in sets:
+            if setOfCells.isValid() is False:
+                return False
+        return True
+
+    def isLegal(self):
+        for cell in self.cells:
+            if len(cell.getOptions()) == 0:
+                return False
+
+        isLegal = self.checkSetsAreValid(self.rows) and self.checkSetsAreValid(self.columns) and self.checkSetsAreValid(self.blocks)
+
+        if isLegal is False:
+            return False
+
+        return True

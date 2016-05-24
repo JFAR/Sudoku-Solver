@@ -10,6 +10,9 @@ class Cell:
 
         return False
 
+    def set(self, num):
+        self.options = [num]
+
     def getOptions(self):
         return self.options
 

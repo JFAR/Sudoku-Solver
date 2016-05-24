@@ -81,3 +81,22 @@ class SudokuBoardTest(unittest.TestCase):
     def test_isSolvedForCompleteBoard(self):
         sudokuBoard = SudokuBoard.SudokuBoard(self.outputBoard)
         self.assertTrue(sudokuBoard.isSolved())
+
+    def test_isLegalForLegalBoard(self):
+        sudokuBoard = SudokuBoard.SudokuBoard(self.outputBoard)
+        self.assertTrue(sudokuBoard.isLegal())
+
+    def test_isLegalForLegalInCompleteBoard(self):
+        inputBoard = copy.deepcopy(self.outputBoard)
+        inputBoard[8][8] = 0
+        sudokuBoard = SudokuBoard.SudokuBoard(inputBoard)
+        self.assertTrue(sudokuBoard.isLegal())
+
+    def test_isLegalForIllegalBoard(self):
+        inputBoard = copy.deepcopy(self.outputBoard)
+        inputBoard[8][8] = 0
+        inputBoard[7][8] = 6
+        sudokuBoard = SudokuBoard.SudokuBoard(inputBoard)
+        sudokuBoard.applyColumnRule()
+        sudokuBoard.applyRowRule()
+        self.assertFalse(sudokuBoard.isLegal())

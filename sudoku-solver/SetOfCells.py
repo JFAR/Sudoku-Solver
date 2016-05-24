@@ -15,3 +15,11 @@ class SetOfCells:
                 if cell.isSet():
                     self.reduceCells()
                     break
+
+    def isValid(self):
+        determinedValues = [cell.getOptions()[0] for cell in self.cells if cell.isSet()]
+
+        if len(set(determinedValues)) < len(determinedValues):
+            return False
+
+        return True
